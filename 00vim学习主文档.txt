@@ -1,0 +1,1885 @@
+<!a0vim的树形架构>
+
+总分标窗列折--－<!程序为道,秩序为场-惟海法师>
+c--修改
+d--删除
+y--复制
+v--可视
+
+总－viminfo-－节章--a-上-吽（ hōng）-金融-CTRL+L"[[""]]"-a{,i{
+分－sessioin-－段---b-五-咪（mēi）-文化-ap,ip-a[,i[
+标-tab-行-----------c-四-叭（bēi）-外交-yy,dd-a(,i(
+窗-window--句-------d-三-呢（nī）-－军事-as,is-at,it
+列－locationdir-词--e-二-嘛（ma）-经济-aw,iw-a",i"
+折－ford--－字------f-初-唵（ōng）-政治-hjkl-a',i',a`,i`
+
+
+
+-手腕
+    -正则表达式
+
+
+-手掌
+1正面文本对象 字符->单词->句子->行->段->节
+2后面数字没有数字可以有历史吗?操作历世
+
+
+大拇指
+会话管理视图管理
+1正面上buffer
+2正面下args
+2总分下反面参数设置插件管理
+
+
+二食指
+正面上v向字符------|
+正面中V行可视模式_{可视模式}
+正面下CTRL+V正面列可视模式____|   
+反面上选择模式字符（鼠标）
+反面上选择模式行符（鼠标三击）
+反面上选择模式块字符（鼠标+ALT）
+
+三、中指
+1正面{普通模式}多窗口
+  标签、windows、折叠
+    文件对象|-内外|、
+    大纲-quickfix|、location
+    tag -标签
+2反面
+反面上替换模式字符r,gr（虚拟替换）
+反面中替换模式行--{替换模式}R，gR（虚拟替换）
+四、无名指
+
+1正面插入模式输入助手
+
+2后面上{命令行模式}___行模式命令
+  !_系统命令
+   _____{行编辑}Q....gQ
+
+
+五、小指
+正面上标记
+正面中寄存器
+正面下寄存器宏
+反面上sed
+反面中awk
+反面下find grep
+
+
+
+Title
+- VIM配置
+    - VIM配置
+        - 查找
+            - scriptnames
+        - 键映射
+            - 特殊键映射
+                - :map <F2> GoDate:<Esc>:read !date<CR>kJ
+            - 与模式相关映射
+                - 插入模式
+                    - :imap <F2> <CR>Date: <Esc>:read  !date<CR>kJ
+                - 操作符等待
+                    - :omap <F7> a{
+            - 模式纵览
+                - 普通，可视模式及操作符等待模式
+                    - map
+                - 可视模式
+                    - vmap
+                - 普通模式
+                    - nmap
+                - 操作符等待模式
+                    - omap
+                - 插入和命令行模式
+                    - map!
+                - 插入模式
+                    - imap
+                - 命令行模式
+                    - cmap
+            - 映射列表
+                - :map
+                    - n
+                        - 普通模式
+                    - v
+                        - 可视模式
+                    - 空白
+                        - 普通模式
+            - 重复映射
+                - 模式不同
+                    - :map <F2> G<F3>
+                      :imap <F2><Esc><F3>
+                      :map <F3> oDate:<Esc>:read !date<CR>kJ
+            - 避免重复映射
+                - 依据模式不同
+                    -  :noremap
+                    - :vnoremap
+                    - :nnoremap
+                    - :onoremap
+                    - :inoremap
+                    - :cnoremap
+            - 递归映射
+                - 中断
+                    - CTRL-c
+            - 删除映射
+                - 依据模式不同
+                    - unmap
+                    - vunmap
+                    - nun map
+                    - ounmap
+                    - unmap!
+                    - cunmap
+                - 删除所有
+                    - mapclear
+            - 追加命令 
+                - :map <F8> :write  <Bar> !checkin %<CR>
+                - :unmap a | unmap b
+                  :unmap a| unmap b
+            - 只对脚本有效
+                - <script>
+            - 只对缓冲区有效
+                - <buffer>
+            - 唯一性约束
+                - <unique>
+        - 标准配置VIMRC
+            - 与VI的兼容性
+                - set nocompatible
+            - 标签
+                - 多个标签文件
+                    - :set   tags=./tags,./../tags,./*/tags
+                - 单个标签文件
+                    - :set
+                      tags=~/proj/tags
+                - 标签
+                    - 标签文件是否排序
+                        - tagbsearch
+                    - 标签的有效字符个数
+                        - taglength
+                    - 指定预览窗口高度
+                        - 'previewheight
+                          '
+            - 断词
+                - 不打断词
+                    - :set linebreak
+                - 显示打断的地方
+                    - 'showbreak'
+            - 允许<BS>删除的字符
+                - set
+                  backspace=indent,eol,start
+                    - 空白，换行，插入模式之前的字符
+            - 自动缩紧
+                - set autoindent
+            - 自动备份
+                - if has("vms")
+                  set nobackup
+                  else
+                  set backup
+                  endif
+            - 命令保存历史
+                - set history=50
+            - 行号
+                - set number
+            - 右下角显示标尺
+                - set ruler
+            - 显示命令
+                - set showcmd
+            - 显示模式
+                - set showmode
+            - 显示匹配点
+                - set incsearch
+            - 语法高亮
+                - set hlsearch
+            - 文件插件
+                - filetype plugin
+                  indent on
+            - 使用文件缩进
+                - autocmd FileType text
+                  setlocal textwidth=78
+            - 简单键盘映射
+                - :map <F5>   if<Esc>eag<Esc>
+                - :map \p     i(<Esc>ea)<Esc>
+            - 插件
+                - 全局
+                    - 某些可以自动更新
+                - 文件类型
+            - 选项窗口
+                - options
+                    - help
+                        - help ‘wrap’
+                    - 移动命令
+                        - set
+                          whichwrap=b,s
+                    - 恢复
+                        - 选项后面加&
+            - 显示消息空间的高度
+                - :set cmdheight=3
+            - 功能激活
+                - .:syntax enable
+            - 终端的彩色支持
+                - setenv TERM
+                  xterm-color
+                - 终端的配色方案
+                    - :colorscheme
+                      evening
+            - 忽略大小写
+                - 忽略
+                    - :set ignorecase
+                - 不忽略
+                    - :set noignorecase
+                - 智能
+                    - :set ignorecase     smartcase
+            - 无折返查找
+                - :set nowrapscan
+            - 折叠
+                - 自动打开
+                    - :set foldopen=all
+                - 默认
+                    - :set foldopen&
+                - 自动关闭
+                    - :set foldclose=all
+                - 依靠缩进建立
+                    - :set   foldmethod=indent
+                - 设置缩进层次
+                    - :set foldlevel=3
+                - 依靠标志折叠
+                    - :set      foldmethod=marker
+                - 依靠表达式折叠
+                    - :set     foldmethod=expr
+                      :set    foldexpr=strlen(su bstitute(substitute(getline(v:lnum),  'nns','',n"gn"),'[ ^>].*','',''))
+            - 设置路径
+                - :set    path+=/usr/local/X11
+                    - 所有子目录
+                        - **
+            - 定义命令行
+                - 定义命令
+                    - :command   DeleteFirst     1delete
+                - 参数个数
+                    - 无参数
+                        -  -nargs=0
+                    - 1个参数
+                        -  -nargs=1
+                    - 多个参数
+                        -  -nargs=*
+                    - 0个或1个
+                        -  -nargs=?
+                    - 1个或者多个
+                        -  -nargs=+
+                - 使用参数
+                    - :command -nargs=+ Say :echo "<args>"
+                        - :Say Hello        World
+                - 使用特殊字符参数
+                    - <q-args>
+                        - :command    -nargs=+ Say   :echo <q-args>
+                            - :echo "he  said     \"hello\""
+                - 参数格式自动转化
+                    - <f-args>
+                        - :command     -nargs=* DoIt  :call   AFunction(<f-args>)
+                            - :DoIt a b      c
+                            - :call  AFunction("a", "b",     "c")
+                - 行范围
+                    - 当前行
+                        -  -range
+                    - 整个文件
+                        -  -range=%
+                    - 行号
+                        -
+                          -range={count}
+                            - :command    -range=% SaveIt   :<line1>,< line2>write!  save_file
+                - count参数
+                    -  -count={number}
+                - bang
+                    - 允许！
+                - 可以制定寄存器
+                    -  -register
+                - 给出命令补全方式
+                    -  -complete={type}
+                - 扩展
+                    -  -bar
+                - 仅对当前缓冲区有效
+                    -  -buffer
+                - 重定义
+                    - !
+                - 删除命令
+                    - :delcommand SaveIt
+                - 删除全部命令
+                    - :comclear
+            - 自动命令
+                - :autocmd FileWritePre       * call DateInsert()
+                - :autocmd [group]      {events}     {file_pattern}     [nested] {command}
+                - 事件
+                    - BufReadPost
+                        - :autocmd
+                          BufReadPost    *.gsm set     filetype=asm
+                    - 忽略事件
+                        - :set      eventignore=WinEnter,WinLeave
+                    - 忽略所有事件
+                        - :set     eventignore=al l
+                    - 正常状态
+                        - :set    eventignore=
+                - 文件命令
+                    - 可以使用正则
+                - 删除
+                    - !
+                - 列表
+                    - autocmd
+                    - 事件匹配
+                        - :autocmd     BufNewFile
+                    - 匹配文件
+                        - :autocmd * *.c
+                    - 对应分组
+                        - :autocmd      cprograms
+                - 分组
+                    - :augroup cprograms
+                      : autocmd     BufReadPost    *.c,*.h :set sw=4      sts=4
+                      : autocmd     BufReadPost *.cpp
+                      :set sw=3 sts=3
+                      :augroup END
+                    - 删除
+                        - :autocmd!   cprograms
+                - 嵌套
+                    - 触发
+                        - :autocmd    FileChangedShell * nested      edit
+                            - :autocmd      BufReadPos t *.new      execute        "doautocmd    BufReadPost " .  expand("<afile>:r")
+                - 使用普通命令模式
+                    - :autocmd        BufReadPost *.log     normal G
+                    - :autocmd         BufReadPost *.chg         execute "normalONew entry:\<Esc>" |       \1read !date
+            - 语言
+                - :language                  fr_FR.ISO_8859-1
+                - 菜单语言
+                    - :set                      langmenu=nl_NL.ISO_8859-1
+                - 缓冲区语言
+                    - :set                      encoding=utf-8
+                - 终端语言
+                    - :let       &termencoding =     &encoding
+                - 显示问号
+                    - ga
+                - 支持的语言
+                    - :set         fileencodings=ucs-bom,utf-8,chinese
+                - 自身的语言
+                    - 'fileencoding'
+                - 强制编码
+                    - :edit     ++enc=koi8-rrussian.txt
+                - 键盘映射
+                    - :set keymap=hebrew
+            - 可视模式
+                - 高亮显示
+                    - ’highlight’
+                - 允许光标停留在没有字符的地方
+                    - ’virtualedit’
+                - 选择
+                    - ’select
+        - 菜单
+            -  "$VIMRUNTIME/menu.vim"
+            - 格式
+                - :menu {menu-item} {keys}
+                    - :menu File.Save :update<CR>
+            - 快捷方式
+                - ALT
+                    - &
+                        -  &File.&Save
+            - 优先级
+                -  10.340
+            - 特殊字符
+                - <>
+                - \
+            - 分割符
+                - sep
+            - 上下文
+                - menu
+                    - 普通可视操作等待模式
+                - nmenu
+                    - 普通模式
+                - vmenu
+                    - 可视模式
+                - omenu
+                    - 操作符等待模式
+                - menu!
+                    - 插入和命令行模式
+                - cmenu
+                    - 命令行模式
+                - amen
+                    - 所有模式
+            - 静默
+                - 无提示
+                    - <silent>
+            - 菜单列表
+                - amenu
+                - amenu edit
+            - 删除菜单
+                - :iunmenu Tools.Make
+            - 杂项
+                - 'guioptions'
+                - :set guioptions-=m
+                    - m
+                        -  删除菜单
+                    - M
+                        - 不被自动加载
+                    - g
+                        - 无效变灰不删除
+                    - t
+                        - 清除时不使用
+                - 翻译菜单
+            - 工具栏和弹出菜单
+                - 工具栏
+                    - T
+                - 弹出菜单
+                    - popup
+        - 语法高亮
+            - 列出已经定义的项目
+                - syntax
+                - 列出簇
+                    - :syntax list      fgroup-nameg
+            - 大小写
+                - 敏感
+                    - :syntax case match
+                - 不敏感
+                    - :syntax case        ignore
+            - 关键字
+                - :syntax keyword   {group} {keyword}
+                    - :syntax keyword      xType int long       char
+                    - :syntax keyword          xStatement if         then else endif
+                - 组
+                    - 语法组的名字
+                    - 设定颜色
+                - 高亮
+                    - :highlight link     xStatement     Statement
+                    - :highlight link        xType Type
+                - 为iskeyword规定的要求里面
+            - 非关键字
+                - :setlocal iskeyword+=-
+                  :syntax keyword    xStatement when-not
+                - 允许缩写
+                    - :syntax keyword       xStatement n[ext]
+                - 匹配
+                    - 使用模式
+                        - :syntax match         xIdentifier  /n<nln+n>/
+                        - :syntax match           xComment /#.*/
+                - 区域
+                    - :syntax region      xString start=/"/     skip=/\\"/ end=/"/
+                    - 保留结尾
+                        - :syntax    region    xComment         start=/%/      end=/$/         contained
+                          :syntax        region    xPreProc          start=/#/           end=/$/      contains=xComment
+                        - 正常结尾
+                            - :syntax      region     xComment     start=/%/       end=/$/    contained
+                              :syntax      region       xPreProc        start=/#/        end=/$/          contains=x      Comment          keepend
+                - 允许嵌套
+                    - :syntax keyword        xTodo TODO  contained
+                      :syntax match      xComment /%.*/          contains=xTodo
+                    - 递归嵌套
+                        - :syntax           region xBlock            start=/{/         end=/}/          contains=xBlock
+                - 包含多个项目
+                    - :syntax region      xList start=/\[/        end=/\]/            contains=ALL
+                    - 不包括的内容
+                        - :syntax          region xList     start=/\[/           end=/\]/           contains=ALLBUT,xString
+                - 跟随组
+                    - if not     (condition) then
+                    - if (condition)              then
+                        - :syntax match         xIf /if/          nextgroup=xIfCondition       skipwhite
+                          :syntax match       xIfCondition      /([^)]*)/      contained           nextgroup=xThen skipwhite
+                          :syntax match           xThen /then/              contained
+                            - 可以出现空格
+                                -
+                                  "skipwhite"
+                            - 可以出现换行
+                                -
+                                  "skipwhite"
+                            - 可以出现空行
+                                -
+                                  "skipempty"
+                - 其他参数
+                    - 一个区域不同显示
+                        -  "matchgroup"
+                            - :syntax        region      xInside       start=/(/     end=/)/
+                            - :syntax      region        xInside         matchgroup =xParen      start=/(/
+                              \ matchgroup    =xParenEnd             end=/)/
+                    - 不同方式显示括号
+                        -  TRANSPARENT
+                            - :syntax        region    cWhile     matchgroup   =cWhile         start=/whilens*(/
+                              end=/)/
+                              \   contains=cCondNest
+                              :syntax        region        cFor      matchgroup =cFor     start=/forns*(/      end=/)/
+                              \   contains=cCondNest
+                              :syntax        region          cCondNest          start=/(/        end=/)/      contained       transparent
+                    - 位移
+                        - :syntax      region xCond        start=/if\s*(/   ms=e+1    end=/)/me=s-1
+                    - 不超过一行
+                        - online
+                    - 续行
+                        - :syntax    region   xPreProc        start=/^#/       end=/$/       contains=xLine       Continue
+                          :syntax match          xLineContinue          "\\$"          contained
+            - 簇
+                - :syntax cluster     xState     contains=xNumber,xIdent
+                - 加入组
+                    - :syntax cluster       xState add=xString
+                - 删除组
+                    -  :syntax cluster         xState        remove=xNumber
+            - 包含其他语法文件
+                - :runtime! syntax/c.vim
+                - :syntax include @Pod   <sfile>:p:h/pod.vim
+                  :syntax region       perlPOD       start=/^=head/        end=/^=cut/     contains=@Pod
+            - 同步
+                - :syntax sync ccomment     minlines=10          maxlines=500
+                - :syntax sync match     shIfSync grouphere   shIf "\<if\>"
+                  :syntax sync match      shIfSync groupthere       NONE "\<fi\>"
+            - 安装语法
+                - 放的这文化目录下面
+            - 可移植语法文件格式
+                - 说明信息
+                - 开头检查
+                - 选择不同的高亮
+                    - hi def link          nameString String
+- 操作上下文
+    - 操作上下文      
+        - 标准输入
+            - ls | vim -
+            - 读取脚本
+                - producer | vim -S       change.vim -
+        - shell中运行
+            - for file in *.txt; do
+              vim -e -s $file <   change.vim
+              lpr -r tempfile
+              done
+                - 使用VIM ex 命令格式
+                - 打印文件
+                - 删除临时文件
+        - 会话
+            - 写入
+                - :mksession vimbook.vim
+            - 读
+                - :source vimbook.vim
+                - vim -S vimbook.vim
+            -globals恢复以大写字母开始并至少包含一个小写字母的全局变量；
+            -localoptions恢复（限定于缓冲区内）本地选项；
+            -resize恢复以行列指定的窗口大小；
+            -sesdir设置当前目录为会话文件所在的位置；
+            -salsh在文件名中使用salsh（/），来代替backslah（\）；
+            -tabpages恢复所有标签页；
+            -terminal恢复终端窗口；
+            -unix使用Unix模式的行尾标志（<NL>）；
+            -winpos恢复 GUI Vim 的窗口位置；
+
+            - 空窗口
+                -  blank
+            - 所有缓冲区
+                -  buffers
+            - 当前目录
+                -  curdir
+            - 折叠
+                -   folds
+            - 帮助窗口
+                -  help
+            - 所有选项
+                -  options
+            - 窗口尺寸
+                -   winsize
+                                :set sessionoptions = blank,buffers,curdir,folds,help,options,tabpages,winsize,terminal
+        - viminfo
+            - 工作上下文
+            - 什么信息要存储
+                - :set viminfo=string
+                - 保存标记的文件数
+                    - :set viminfo='1000
+                - 全局标记
+                    - A～Z，0～9
+                        - :set     viminfo='1000,  f1
+                - 寄存器保存文本数
+                    - :set    viminfo='1000,f1,<500
+                - 命令历史记录行数
+                    - ：
+                - 输入历史记录行数
+                    - @
+                - 可移动介质
+                    - r
+                - 启动关闭高亮
+                    - h
+                - 缓冲区列表
+                    - %
+                - 编码转换文本
+                    - c
+                - viminfo文件名
+                    - n
+            - 信息移动
+                - 写
+                    - :wviminfo!
+                      ~/tmp/viminfo
+                - 读
+                    - :rviminfo!
+                      ~/tmp/viminfo
+        - 交换文件在那里
+            - vim -r
+            - 从崩溃中恢复
+                - :recover
+        - 挂起与继续
+            - 挂起
+                - 回来
+                    - fg
+                - 进入
+                    - CTRL-z
+        - 重返中断处
+            - ‘0
+        - 重返文件
+            - oldfiles
+        - 目录
+            - 改变
+                - :cd
+            - 当前目录
+                - :pwd
+        - 其它类型文件
+            - :set fileformats=unix,dos
+            - 强制格式
+                - :edit ++ff=unix  file.txt
+            - 互联网
+                -  netrw插件
+        - 加载脚本
+            - vim -s script file.txt ..
+            - s与e不同时使用
+        - 撤销树
+            - 文件
+                - 最后
+                    - :later 1f
+                - 以前
+                    - :earlier 1f
+                - 跳转
+                    - :undo 2
+            - 其他
+                - 后退
+                    - g-
+                - 前进
+                    - g+
+            - 时间旅行
+                - 分支
+                    - :undolist
+                - :earlier 10s
+                - :later 1m
+                    - 未来世界
+            - :echo undotree()
+- 多文件操作
+    -
+
+      多文件操作
+
+        - 特殊操作
+            - 标记
+                - 原来的地方
+                    - ''
+                - 老的地方
+                    - CTRL+o
+                - j较新的地方
+                    - CTRL+i
+                - 所有标记
+                    - ：jumps
+                - 文件外
+                    - m
+                        - A~Z
+                - 文件内
+                    - 有名字的标记
+                        - 标记
+                            - m
+                                - a~z
+                        - 跳转
+                            - ‘
+                                - a~z
+                                - 前一个光标位
+                                  置
+                                    - '
+                                - 最后的退出缓
+                                  冲区位置，默
+                                  认行首
+                                    - "
+                                - 最后修改开始
+                                  的地方
+                                    - [
+                                - 最后编辑结束
+                                  的地方
+                                    - ]
+                        - 查找所有标记
+                            - marks
+                                - 显示系统所有
+                                  标记
+            - 寄存器
+                - 记录与回放
+                    - 记录
+                        -  q{registerg}
+                            - 寄存器
+                                - a~z
+                        - 输入命令
+                        - 结束
+                            - q
+                    - 回放
+                        -  @fregisterg
+                        - 重复执行
+                            - @@
+                    - 先p后y方式修改
+                - 剪切板
+                    - *
+                        - y
+                        - p
+                    - +
+                        - 真的
+                - 其他
+                    - a~z
+                        - 使用方式
+                            - "a
+            - 标签
+                - 被定义的地方
+                    - ctags *.c
+                    - 跳转
+                        - 过去
+                            - CTRL-]
+                        - 回来
+                            - CTRL-t
+                - 显示所有
+                    - tags
+                - 分割窗口
+                    - :stag tagname
+                - 多个匹配
+                    - 移动
+                        - 上一个
+                            -  :[count]
+                              tprevious
+                        - 下一个
+                            -  :[count]
+                              tnext
+                        - 第一个
+                            -  :tfirst
+                        - 最后一个
+                            - :tlast
+                - 选择一个
+                    - :tselect tagname
+                        - 模式
+                            - /
+                                - 开头
+                                    - ^
+                                - 结尾
+                                    - $
+                - 猜测标签名
+                    - :tag write_<Tab>
+                    - :tag /block
+                    - :tselect /^write_
+                - 标签浏览器
+                    -   :vsplit        functions
+                - 预览窗口
+                    - :ptag write_char
+                    - CTRL-w }  
+                    - 关闭
+                        - :pclose
+                    - 指定文件
+                        - :pedit defs.h
+                    - 搜索所有的匹配
+                        - :psearch popen
+        - 多个窗口
+            - 窗口
+                - 保存
+                    - :mkview
+                - 取出
+                    - :loadview
+            - 标签页
+                - tabedit
+                - 建立新的标签页
+                    - tabsplit
+                    - tab
+                - 跳转
+                    - gt
+                - 关闭其他标签
+                    - tabonly
+            - 窗口分割
+                - 水平分割
+                    - split
+                - 窗口跳转
+                    - CTRL-W w
+                - 关闭当前窗口
+                    - close
+                - 关闭其他窗口
+                    - only
+                - 新建一个窗口
+                    - new
+                - 扩大窗口
+                    - CTRL-W +
+                - 缩小窗口
+                    - CTRL-W -
+                - 指定窗口高度
+                    - {height}CTRL-W _
+                - 使用鼠标
+                - 垂直分割
+                    - vsplit
+                    - 垂直新建
+                        - vnew
+                            - vertical
+                              new
+                - 窗口跳转
+                    - CTRL+w hjkl
+                - 移动窗口
+                    - CTRL-W JKHL
+                - 关闭所有窗口
+                    - qall
+                - 写所有窗口
+                    - wall
+                - 为所有文件打开一个窗口
+                    - 命令行
+                        - -o
+                - 文件差异
+                    - 比较补丁
+                        - :edit main.c
+                          :vertical     diffpatch       main.c diff
+                    - vim 内部比较
+                        - :edit main.c
+                          :vertical       diffsplit           main.c~
+                    - 显示两个文件差异
+                        - vimdiff
+                    - 文件更新
+                        - 左面更新右边dp
+                            - dp
+                                - diffupdate
+                        - 右面更新左面
+                            - do
+                - 什么时候显示窗口状态
+                    - laststatus
+                        - 0
+                            - 永远不
+                        - 1
+                            - 变更时显示
+                        - 2
+                            - 永远有
+                - 新的窗口出现在下面
+                    - splitblow
+                - 新的窗口出现在右边
+                    - splitright
+                - 新窗口修饰词
+                    - 左上
+                        - leftabove
+                        - aboveleft
+                    - 右下
+                        - rightbelow
+                        - belowright
+                    - 最上或者最左
+                        - topleft
+                    - 最下或最右
+                        - boright
+            - 文件标题
+                - -
+                    - 文件不能被修改
+                - +
+                    - 文件已经被修改
+                - =
+                    - 文件只读
+                - =+
+                    - 文件只读已经被修改
+            - 重画屏幕
+                - CTRL-l
+        - 绥冲区列表
+            - 隐藏
+                - hide
+            - buffers
+            - ls
+            - 属性
+                - u
+                    - 列表外
+                - %
+                    - 当前
+                - #
+                    - 轮换
+                - a
+                    - 激活
+                - h
+                    - 隐藏
+                - =
+                    - 只读
+                - -
+                    - 不可修改
+                - +
+                    - 已经修改
+            - 编辑
+                - buffer 2
+            - 移动
+                - 下一个
+                    - bnext
+                - 上一个
+                    - bprevious
+                - 第一个
+                    - bfirst
+                - 最后一个
+                    - blast
+            - 删除
+                - delete 2
+                - 显示
+                    - buffers !
+        - 文件操作
+            - 下一个
+                - next
+            - 强制操作
+                - !
+            - 写入
+                - w
+            - 列表
+                - args
+                    - 使用通配符
+                        - args *.txt
+            - 上一个
+                - previous
+            - 最后一个
+                - last
+            - 第一个
+                - first
+            - 自动保存
+                - set autowrite
+            - 自动备份
+                - set backup
+                    - 备份文件名
+                        - :set     backupext=.bak
+            - 保留原始文件
+                - :set patchmode=.orig
+            - 两个文件跳转
+                - CTRL+^
+            - 上一次离开那个文件的位置
+                - ‘“
+            - 上一次修改哪个的地方
+                - '.
+            - 添加到文件
+                - :write >> logfile
+            - 显示文件
+                - vim  -R
+            - 修改文件名
+                - saveas
+            - 文件浏览器
+                - 编辑文件
+                    - 回车键
+                - 显示文件
+                    - v
+                        - 竖向分割显示文件
+                    - p
+                        - 预览文件
+                    - p
+                        - 上次的窗口编辑
+                    - t
+                        - 新的标签页显示文件
+                - 显示风格
+                    - i
+                        - 长格式显示
+                    - s
+                        - 排序方式，名字，时间，日期，
+                    - r
+                        - 反序
+                - 更改当前目录
+                    - c
+                - 文件更名
+                    - R
+                - 删除
+                    - D
+                        - 删除光标下文件
+                - 标签
+                    - 建立
+                        - mb
+                    - 访问
+                        - gb
+                - 浏览目录
+                    - Explore
+                - 打开
+                    - :browse split /etc
+                - o
+                    - 横向分割显示文件
+            - 查找文件
+                - gf
+                - 查找路径
+                    - :set      path+=c:/prog/include
+            - 多个文件修改
+                - :argdo
+                  %s/\<x_c\t\>/x_counter /ge | update         - e
+                        - 不打印错误
+                    - |
+                        - 命令分割
+                    - update
+                        - 存储
+        - 命令窗口
+            - 标准命令
+                - 编辑
+                    - 移动
+                        - 字符
+                            - 左箭头
+                            - 右箭头
+                        - 单词
+                            - SHIFT-左箭头
+                            - CTRL-左箭头
+                        - 行
+                            - 行首
+                                - CTRL-b
+                            - 行尾
+                                - CTRL-e
+                    - 删除
+                        - 删除键
+                        - 单词
+                            - CTRL-w
+                        - 全部
+                            - CTRL+u
+                    - 插入与替换
+                        - insert 键
+                    - 取消
+                        - CTRL-c
+                    - 缩写
+                    - 补全
+                    - 上下文依据
+                    - 匹配列表
+                        - CTRL-d
+                - global命令
+                    - :[range]global/fpa
+                      tterng/{commandg}
+                        - 命令
+                            - 替换
+                                - :g+//+s/foobar/bar foo/g
+                            - 移动
+                                - :global/^/m 0
+                - 替换
+                    - 范围
+                        - :[range]substitute/from/to/[flags]
+                            - 全部行
+                                - %
+                            - flag
+                                - 行内全部
+                                    - g
+                                - 确认
+                                    - c
+                                - 打印
+                                    - p
+                            - 分隔符
+                                - 可以用其他
+                                    - +
+                            - 范围
+                                - 1～n行
+                                    - 1， 5
+                                - 当前行
+                                    - .
+                                - 最后一行
+                                    - $
+                                - 搜索范围
+                                    - ／
+                                        - :?^Chapter?,/^Chapter/s=grey=gray=g
+                                    - ？
+                                - 前面
+                                    - +
+                                - 后面
+                                    - -
+                                - 使用标记
+                                    - ‘
+                                        -'t,'a
+                                - 可视模式
+                                    - 开头
+                                        - ' <
+                                    - 结束
+                                        - '  >
+                    - 指定行数
+                        - 5:
+                    - 多个文件替换
+                        - 使用命令记录与回放
+            - 外部命令
+                - ！
+                    -  !{motiong}{program g}
+                        - !5Gsort<Enter>
+                    - 读入一个命令的输入
+                        - :read !ls
+                        - :0read !date      -u
+                    - 文本输出给一个命令
+                        - w
+                            - :write !wc
+                    - 过滤文本
+                        -  :[range]!{programg}
+            - 命令历史
+                - 命令行窗口
+                    - 进入
+                        - q:
+                    - 修改
+                    - 退出
+                        - 回车键
+                    - 执行
+                - 命令历史
+                    - 上下键
+                    - history
+- 单个文件操作
+    -
+  单个文件操作
+        - 文件级操作
+            - 保存退出
+                - ZZ    
+            - 放弃修改
+                - q!    
+            - 确认当前位置
+                - CTRL+g
+            - 查找
+                - scriptnams
+            - 读入文件
+                -  :read ffilenameg
+                - 位置
+                    -  :$r patch
+            - 保存部分行
+                - :.,$write! tempo
+            - 排版文本
+                - :set textwidth=72
+                - gq
+            - 单词统计
+                - G CTRL-g
+            - 加密
+                - vim -x
+                - :X
+            - 二进制文件
+                - vim -b
+                - 格式化显示
+                    - :%!xxd
+                    - 取消
+                        - :%!xxd -r
+            - 压缩
+                - gzip
+        - 通用操作
+            - 可结合类操作
+                - 编辑操作
+                    - 修改动词
+                        - c
+                            - 包括空
+                                - a
+                            - 不包括空
+                                - i
+                    - 删除动词
+                        - d
+                            - 包括空
+                                - a
+                            - 不包括空
+                                - i
+                    - 撤销
+                        - u
+                    - 重做
+                        - CTRL+r
+                    - 帮助
+                        - help,h
+                    - 恢复行
+                        - U
+                    - 查找
+                        - 向下查找
+                            - ／
+                                - 特殊字符
+                                    -.*[]^%/n?~$
+                                - 向下
+                                    - n
+                                - 向前
+                                    - N
+                                - 历史’
+                                    - 上下
+                                      光标
+                            - 命令历史
+                                - 上下键
+                            - 重复
+                                - //
+                        - 高亮
+                            - set
+                              hlsearch
+                        - 大小写
+                            - :set
+                              ignorecase
+                        - 向前查找
+                            - ？
+                                - 偏移
+                                    - ?const?e-2
+                            - 命令历史
+                                - 上下键
+                        - 单个模式的大小写匹配
+                            - \c
+                                - 忽略
+                            - \C
+                                - 敏感
+                        - 偏移
+                            - 向前
+                                - /默认/2
+                            - 字符偏移
+                                - /const       /e
+                                - /const     /e+1
+                                - /const  /e-1
+                                - /const       /b+2
+                    - 拷贝
+                        - y
+                    - 粘贴
+                        - 光标之后
+                            - p
+                        - 光标之前
+                            - P
+                    - 大小写
+                        - gU
+                            - 一行
+                                - gUgU
+                - 数字
+                    - 与各类命令组合
+                        - 1~n
+                        - -1~-n
+            - 格式
+                - 断行
+                    - :set textwidth=30
+                - 重排文本
+                    - gq
+                        - v4jgq
+                - 对齐文本
+                    - 中心对齐
+                        - :{range}center         [width]
+                            - :1,5center       40
+                    - 右对齐
+                        - :1,5right 37
+                    - 左对齐
+                        - :{range}left   [margin]
+                            - :2,5left
+                    - 两端对齐
+                        - :runtime   macros/justify.vim
+                - 外部命令
+                    - :%!fmt
+                - 缩进和制表符
+                    - 自动缩紧
+                        - :set        autoindent
+                    - 增加缩进
+                        - >>
+                    - 缩进量单位
+                        - :set        shiftwidth=4
+                    - 制表位
+                        - :set       softtabstop=4
+                        - 改变制表位
+                            - :set           tabstop=3
+                            - :retab 8
+        - 单个 窗口
+            - 折叠
+                - 滚动绑定
+                    - set no scrollbind
+                - 关闭一个折叠
+                    - zc
+                    - 关闭光标上所有的折叠
+                        - zC
+                - 打开一个折叠
+                    - zo
+                    - 打开光标上所有的折叠
+                        - zO
+                - 跳转到下一个修改点
+                    - ]c
+                - 跳转到上一个修改点
+                    - [c
+                - 创建一个折叠
+                    -  zf F-old creation
+                - 展开折叠
+                    - zm
+                    - 全部展开
+                        - zM
+                - 收起折叠
+                    - zr
+                    - 全部折叠
+                        - zR
+                - 禁止
+                    - zn
+                    - 切换
+                        - zi
+                - 允许
+                    - zN
+                - 操作同行
+                    - 移动
+                    - 增删改查
+                - 标记
+                    - 打开
+                        - -
+                    - 关闭
+                        - +
+                    - 其他
+                        - |
+                - 删除
+                    - 一个
+                        - zd
+                    - 所有
+                        - zD
+                - 存储和恢复
+                    - 存储
+                        - :mkview 3
+                    - 恢复
+                        - :loadview 2
+            - 可视
+                - 可视列模式
+                    - CTRL-V
+                        - 特殊的$
+                    - 插入文本
+                        - I
+                            -   Ifstringg< Esc>
+                        - 可视块右侧插入
+                            - A
+                    - 修改文本
+                        - c
+                        - 到行尾
+                            - C
+                    - 大小写交换
+                        - ～
+                        - 大写
+                            - U
+                        - 小写
+                            - u
+                    - 替换
+                        - r
+                    - 平移
+                        - 向右
+                            - >
+                    - 连接若干行
+                        - J
+                    - CTRL-v
+                    - 左上角开始操作
+                    - 以列为单位
+                - 可视模式
+                    - v
+                        - 以字符为单位
+                        - 停止
+                            - CTRL-c
+                - 可视行模式
+                    - V
+                        - 以行为单位
+                - 通用操作
+                    - 跳转
+                        - o
+                            - 别外一端
+                        - O
+                            - 另一个角
+                    - 自动加1
+                        - CTRL-a
+                    - 上一次的选择
+                        - gv
+                    - ～
+                        - 大写转换
+                    - d
+                        - 删除选择区域
+                    - c
+                        - 修改
+                    - y
+                        - 抽出
+                    - =
+                        - 经过外部命令过虑
+                    - gq
+                        - 重新排版
+            - 滚动条
+                - 水平
+                    - :set guioptions+=b
+                    - 向右
+                        - 字符
+                            - zh
+                        - 半个屏幕
+                            - zH
+                        - 行尾（屏幕)
+                            - ze
+                    - 向左
+                        - 字符
+                            - zl
+                        - 半个屏幕
+                            - zL
+                        - 行首
+                            - zs
+                    - 第一个可见
+                        - g0
+                    - 第一个非空白
+                        - g^
+                    - 中间
+                        - gm
+                    - 最后一个可见
+                        - g$
+            - 窗口移动
+                - 移动一行
+                    - 向下
+                        - gj
+                    - 向上
+                        - gk
+                - 一个屏幕内
+                    - 最上
+                        - H
+                    - 中间
+                        - M
+                    - 下面
+                        - L
+                - 滚动半屏
+                    - 向上
+                        - CTRL+u
+                    - 向下
+                        - CTRL+d
+                - 整个屏幕
+                    - 向下
+                        - CTRL+f
+                    - 向上
+                        - CTRL+b
+        - 代码
+            -  "#ifdef" - "#endif"
+                - 开始
+                    - [#
+                - 结束
+                    - ]#
+            - {}
+                - 开始
+                    - [{
+                - 结束
+                    - ]{
+            - 方法
+                - 开始
+                    - [m
+                - 结束
+                    - ]m
+            - ()
+                - 开始
+                    - [(
+                - 结束
+                    - ](
+            - 注释
+                - 开始
+                    - [/
+                - 结束
+                    - ]/
+            - 全局标识符
+                - [I
+            - 定义文件
+                - :checkpath
+            - 跳转匹配
+                - [<Tab>
+                - [CTRL-i
+                - 第一个匹配
+                    - [i
+                - 所有的匹配
+                    - ]I
+                - 光标下第一个匹配
+                    - ]i
+            - 宏定义
+                - [D
+                - 第一个匹配
+                    - [d
+                - 所有的匹配
+                    - ]D
+                - 光标下第一个匹配
+                    - ]d
+            - 局部标识符
+                - gD
+                - 首次出现的地方
+                    - gd
+        - 单个文件对象
+            - 表格
+                - 设置表格编辑
+                    - set
+                      virtualedit=all
+                        - 虚拟空间
+                - 版面乱了
+                    - gr
+            - 字符级
+                - 结构匹配
+                    - %
+                        - （）
+                - 查找
+                    - 删除动词
+                        - d
+                    - 修改动词
+                        - c
+                    - 向下
+                        - f
+                    - 向前
+                        - F
+                    - 向下前一个字符
+                        - t
+                    - 向下前一个字符
+                        - T
+                    - 匹配任何一个字符
+                        - 。
+                - 移动
+                    - hijk
+                - 删除
+                    - x
+                - 转化成大写
+                    - ～
+            - 单词级操作
+                - 移动
+                    - 删除动词
+                        - d
+                            - 包括空
+                                - a
+                            - 不包括空
+                                - i
+                    - 词首
+                        - 下一个
+                            - w
+                        - 上一个
+                            - b
+                    - 词尾
+                        - 下一个
+                            - e
+                        - 上一个
+                            - ge
+                    - 修改动词
+                        - c
+                            - 包括空
+                                - a
+                            - 不包括空
+                                - i
+                - 查找
+                    - 词首
+                        - \<
+                    - 词尾
+                        - \>
+                - 文本对象
+                    - 一个单词
+                        - aw
+                - 查看man信息
+                    - K
+                - 单词缩写
+                    - 一个单词
+                        - :iabbrev ad         advertisement
+                        - 空格实现插入
+                        - 插入模式
+                    - 多个单词
+                        - :iabbrev JB         Jack Benny
+                    - 缩写列表
+                        -  :abbreviate
+                        - 命令行模式
+                            - c
+                        - 插入模式或者命令行
+                            - i
+                    - 删除一个
+                        - :unabbreviate      @f
+                    - 删除全部
+                        - :abclear
+                    - 避免缩写被MAP
+                        - :noreabbrev      @a adder
+                - 数
+                    - 加1
+                        - CTRL-a
+                    - 减1
+                        - CTRL-x
+            - 句级
+                - 文本对象
+                    - 一句
+                        - 包括空白
+                            - as
+                        - 不包括空白
+                            - is
+            - 行级
+                - 删除
+                    - dd
+                - 新建
+                    - 下面
+                        - o    
+                - 移动
+                    - 删除动词
+                        - d
+                            - 包括空
+                                - a
+                            - 不包括空
+                                - i
+                    - 行首
+                        - ^
+                    - 行尾
+                        - $
+                    - 指定行
+                        - 70G 移动到70行
+                    - 第一行
+                        - gg
+                    - 最后一行
+                        - G
+                    - 修改动词
+                        - c
+                            - 包括空
+                                - a
+                            - 不包括空
+                                - i
+                - 修改
+                    - cc
+                - 拷贝
+                    - Y
+                - 模式行
+                    - :set modelines=10
+                        - // vim:set
+                          textwidth=72
+                          dir=cn:ntmp:
+                          use c:ntmp
+                          here
+            - 段
+                - 段对象
+                    - ap
+                    - 分隔符
+                        - 空行
+                - 变段为行
+                    - :g/./,/^$/join
+                    - :g/nS/,/^ns*$/join
+            - 节级操作
+                - 插入模式下输入
+                    - CTRL-l
+                - 上一节
+                    - [[
+                    - []
+                - 下一节
+                    - ]]
+                    - ][
+        - 主题
+        - 其它模式
+            - 替换模式
+                - R
+                - 虚拟替换模式
+                    - rx
+                        - 表格
+            - 插入模式
+                - 补全文本
+                    - 文件名
+                        - CTRL-x CTRL-f
+                        - 回去
+                            - CTRL-n
+                    - 整行
+                        - CTRL-x CTRL-l
+                    - 宏定义
+                        - CTRL-x CTRL-d
+                    - 当前文件以及所包含的文件
+                        - CTRL-x CTRL-i
+                    - 字典内的内容
+                        - CTRL-x CTRL-k
+                    - 同义词字典
+                        - CTRL-x CTRL-t
+                    - 标签
+                        - CTRL-x CTRL-]
+                    - vim 命令行
+                        - CTRL-x CTRL-v
+                    - 补全代码
+                        - CTRL-x CTRL-o
+                - 行
+                    - 进入
+                        - 行头插入
+                            - I
+                        - 行尾插入
+                            - A
+                        - 新行
+                            - 下面
+                                - o
+                            - 上面
+                                - O
+                    - 重复上一次操作
+                        - i CTRL-a
+                - 字符
+                    - 进入
+                        - 光标位置插入
+                            - i
+                        - 字符后面插入
+                            - a
+                    - 重复上一次操作
+                        - i CTRL-y
+                    - 插入特殊字符
+                        - CTRL-V <Esc>
+                        - 使用数字
+                            - CTRL-v 127
+                            - CTRL-v x7f
+                                - 16进制
+                            - CTRL-V      u1234
+                                - utf
+                    - 二合字符
+                        - 版权
+                            - CTRL-K Co
+                        - 可输入的字符列表
+                            - :digraphs
+                        - 自定义
+                            - :digraph             a"
+                - 执行普通模式命令
+                    - CTRL-O {command}
+                - 插入寄存器内容
+                    - 按本义插入（包括中间的操作过程字符）
+                        - CTRL-r CTRL-r
+                    - 按照内容插入
+                    - 寄存器
+                        - “
+                            - 最近删除或者抽出的内
+                              容
+                        - %
+                            - 当前文件名
+                        - #
+                            - 轮换文件名
+                        - *
+                            - 剪切板内容（X11主
+                              选）
+                        - +
+                            - 剪切板内容
+                        - ／
+                            - 最近search模式
+                        - ：
+                            - 最近命令行寄存器
+                        - 。
+                            - 最近插入文本寄存器
+                        - -
+                            - 最近的行内小于一行的
+                              删除
+                        - =
+                            - 表达式的值
+                            - 按照愿意显示
+                                - CTRL-r
+                                   =
+                                  <up>
+                    - 按照本义插入，不进行自动缩进
+                        - CTRL-R CTRL-0
+                    - 按照本义插入，进行自动缩进
+                        - CTRL-r CTRL-p
+- 其它配置
+    -
+
+
+        - 其它配置
+            - 编译
+                - :make fargumentsg
+                    - :!make | &tee    /tmp/vim215953.err
+                - 浏览错误
+                    - <Enter>
+                    - next
+                    - 详细信息
+                        - cc
+                            - 第三个错误
+                                - cc 3
+                    - 浏览
+                        - clist
+                    - 上一个错误
+                        - cprevious
+                    - 旧的错误列表
+                        - colder
+                    - 新的错误列表
+                        - cnewer
+                - 输出重定向
+                    - :{file ffilenameg
+            - 指定编译器
+                - 'makeprg'
+                - VC++:set makeprg=nmake
+                - 转义
+                    - :set      makeprg=nmaken
+                      -fn project.mak
+                - 当前文件
+                    - :set       makeprg=maken %
+                - errorformat
+            - C语言风格缩进
+                - :set cindent       shiftwidth=4
+                - 设定缩进风格
+                    - 'cinoptions'
+                - 自动缩进
+                    - :filetype indenton
+                - 其他缩进
+                    - 'autoindent'
+                    - 'smartindent'
+                - 修正缩进
+                    - CTRL-t
+                    - CTRL-d
+                    - >>
+                    - <<
+                - 制表符和空格
+                    - tabstop
+                    - 混合设定
+                        - 'softtabstop'
+                    - 只用空格
+                        - :set expandtab
+                - 排版注释格式
+                    - gq]/
+                - 定义注释
+                    - :set comments=://
+                    - {flags}:{text]
+                        - :set      comments=n:>,n  :!
+                            - n  为标识位
+                        - :set
+                          comments=s1:/* ,mb:*,ex:*/
+                            - s开始
+                            - m中间
+                            - e结束
+
+
+
+现在已经可以熟练使用VIM的大多数基本命令、功能来进行项目代码的开发了，但是在项目的开发过程中，依然会感觉到一些操作效率比较低，比如通过h/j/k/l来进行光标的大范围移动这类操作，显然VIM提供了更高效的命令操作方式。最近经常需要完成的工作就是需要在代码之间来回的复制、粘贴、搜索和替换，常用的d/y/x/p命令已经显得不够，于是学习了一下VIM的寄存器功能，使用寄存器的内容缓冲功能可以极大地提高大量复制粘贴工作的效率。
+
+寄存器类型
+VIM中有9种类型的寄存器，寄存器的主要功能就是缓存操作过程中删除、复制、搜索等的文本内容，通过 :help registers命令查看寄存器的详细帮助说明，这里对类型翻译如下：
+未命名寄存器 ""  —— vim使用的默认寄存器，文本来源命令：d/c/s/x/y
+10个数字命名寄存器 "0 - "9 —— vim缓存yank和delete行操作命令产生的文本
+1个非行删除内容缓存寄存器 "- —— vim缓存delete操作在非行上时产生的文本
+26个字母命名寄存器 "a - "z / "A - "Z —— 完全由用户指定内容的寄存器
+4个只读寄存器 ". "% "# ":  
+表达式寄存器 "= —— 使用VIM强大的表达式功能（从来没用过，一点不懂）
+GUI选择寄存器 "* "+ "~ —— vim缓存在GUI中选择的文本
+黑洞寄存器 "_ —— 类似Linux中的/dev/null文件，只进不出，可用来滤掉影响默认寄存器的内容
+最后搜索模式寄存器 "/ —— 缓存在vim中使用过的最后的搜索内容
+这些寄存器很多，那怎么来查看它们的内容呢？使用VIM的 :registers命令或者短一些的 :dis命令，这两个命令会列出所有存在的寄存器的内容，然后你就可以选择指定寄存器的内容进行粘贴了。
+
+寄存器使用
+注意到上述寄存器的命名前面都有一个双引号，这就是使用他们的方式。
+在Normal模式下操作d/y/x等命令时，通过在命令前面加入寄存器的名字如 "ayy，来将命令生成的内容放入指定的寄存器中，如上面的a寄存器中，而不是vim默认使用的""寄存器和"0寄存器。
+粘贴时，通过在p命令的前面加入寄存器的名字如 "ap，来将寄存器中的内容放入到光标所在的位置行上或下。
+只读寄存器、搜索模式寄存器由VIM进行内容放入，用户只能使用他们的内容。
+下面对个人觉得在开发中会比较有用和熟悉的一些寄存器进行具体的说明。
+数字寄存器
+"0 : 存放最近使用最多的y命令生成的文本内容,如果未显式指定其内容
+"1 - "9 : 存放最近使用的d行操作命令生成的文本内容,如果未显式指定其内容，并在9个寄存器间对内容进行轮流存放，即有新的内容时，将"1的内容推到"2, 2到3，3到4 ...
+字母寄存器
+如果你打算将一段内容进行多次长时间的来回拷贝，则最好使用字母寄存器，因为他们的内容被你修改后不会被VIM自动修改掉，而数字寄存器的内容随着新操作的使用会覆盖掉你指定的内容。
+"a - "z : 每次指定这些寄存器之一时，产生的文本内容将覆盖掉寄存器中原有的内容
+"A - "Z : 每次指定这些寄存器之一时，产生的文本内容将追加到寄存器中原有的内容之后，如果选项'cpoptions'的值中有>符号，则在追加同时会进行行分割，可以通过命令： :set cpo+=>设置。
+只读寄存器
+". : 包含最后在vim insert模式下插入的文本内容，也可以通过命令 . 重复上一次的操作。
+"% : 包含当前文件的名字，方便在文件中插入文件名
+"# : 包含当前可选择的文件名，指在当前会话中使用过的文件的名字
+系统剪贴板
+在系统中进行多个应用之间的内容拷贝时，会使用到系统剪贴板，这可以使用"*,"+寄存器来将内容粘贴到VIM中，他们也都是只读寄存器。除此之外，还可以使用键盘快捷键Shift+Insert来快速插入。
+寄存器内容设置
+除了上面介绍的通过在操作命令前添加寄存器号来指定寄存器的内容外，vim还提供了在命令行显式指定寄存器内容的命令 :let-@，例如命令 :let @a = "vim registers blog", 表示将"a寄存器内容设置为右值。
+粘贴模式
+在vim中可以通过命令 :set paste来设置粘贴模式状态，此时粘贴的内容将可以保持原有的格式不变；通过命令 :set nopaste命令回到正常操作模式。
+
+<!a1设置总体参数>
+
+"set viminfo^=%                   "Remember info about open buffers on close
+set viminfo=\"500,'1000,h,f1,rA:,r$TEMP:,r$TMP:,r$TMPDIR:,:5000,!,n$VIM/_viminfo
+set sessionoptions=blank,buffers,curdir,folds,help,options,tabpages,winsize,terminal
+" 当离开插入模式时自动保存
+autocmd InsertLeave * write
+" 或者，当文件被修改且失去焦点时自动保存
+autocmd FocusLost * if &mod | write | endif
+set autowrite
+
+
+<!a2其它杂项>
+处理许多文件的另一种方法是参数列表。
+它包含启动vim时作为参数传递的任何文件(例如：vim someFile.txt someOtherFile.py)。括号内的文件是当前文件。
+:args
+[someFile.txt] someOtherFile.py
+1
+2
+:n将带您到列表中的下一个文件，并且:N将带您返回。您还可以使用:argadd添加到argslist，也可以用
+:n some.py files.py you.py want.py to.py work.py with.py
+or to open all *.py files recursively from some project.
+:n ~/MyProjects/TimeMachine/**/*.py
+1
+2
+3
+如果您对文件有类似的更改，args列表也可以很好地处理宏(请参阅:help q)。只需将宏记录在第一个文件上，以:n结束以移动到下一个文件，然后停止记录。
+qq/searchForSomethingAndDoStuffOrWhatever:nq
+1
+然后在所有文件(6@q)中运行宏，检查以确保一切顺利，并以:wall结束。
+这取决于你想做什么。如果您只是在许多文件中有一个完全相同的更改(这些是唯一加载的)，我还喜欢:ba (:tabdo )命令。它非常快，你可以看到发生了什么。
+如果打开了一堆缓冲区，就可以加载要在其中工作的文件，每个文件都在一个窗口中，并对所有这些文件执行regexp操作。
+CTRL-w v :b someFile
+:sp anotherFile
+...
+:windo :%s/foo/bar/g
+1
+2
+3
+4
+我真的推荐FuzzyFinder，它使您的生活更容易打开文件。
+发布于 2010-03-15 22:29:11
+使用bufdo命令。
+:bufdo command
+1
+:bufdo command大致相当于遍历每个缓冲区并执行命令。例如，假设您希望在所有缓冲区中进行查找和替换：
+:bufdo! %s/FIND/REPLACE/g
+1
+或者，假设我们希望从所有缓冲区中删除与regex "SQL“匹配的所有文本行：
+:bufdo! g/SQL/del
+1
+或者我们希望在所有缓冲区上将文件编码设置为UTF-8：
+:bufdo! set fenc=utf-8
+1
+对于Windows (:windo)、Tabs (:tabdo)和参数(:argdo)，可以进行上述推断。有关更多信息，请参见帮助:bufdo。
+票数 58
+EN
+Stack Overflow用户
+发布于 2015-06-04 12:06:50
+我们可以使用vimgrep并在argslist中进行搜索。但是首先，让我们用所有的缓冲区填充我们的辩论列表：
+:bufdo :args ## %
+1
+现在我们可以在我们的讨论列表中搜索
+:vimgrep /blah/ ##
+1
+% == the current filepath和## == the arglist。
+如果您想了解更多信息，我建议您观看这些vimcast：Populate the arglist，Search multiple files with vimgrep
+
+
+
+
+
+
